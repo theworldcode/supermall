@@ -3,13 +3,13 @@ import VueRouter from 'vue-router'
 
 //懒加载
 const Home = () =>
-    import ('/views/home/Home')
+    import ('views/home/Home')
 const Category = () =>
-    import ('/views/category/Category')
+    import ('views/category/Category')
 const Cart = () =>
-    import ('/views/cart/Cart')
+    import ('views/cart/Cart')
 const Profile = () =>
-    import ('/views/profile/Profile')
+    import ('views/profile/Profile')
 
 //1.安装插件
 Vue.use(VueRouter)
@@ -35,10 +35,10 @@ const routes = [{
         path: '/profile',
         component: Profile
     },
-    {
-        path: '/detail/:id',
-        component: Detail
-    }
+    // {
+    //     path: '/detail/:id',
+    //     component: Detail
+    // }
 ]
 const router = new VueRouter({
     routes,

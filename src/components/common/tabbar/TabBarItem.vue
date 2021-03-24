@@ -20,6 +20,7 @@
         name:"TabBarItem",
         data(){
             return{
+               
                 // isActive:false
             }
         },
