@@ -10,35 +10,42 @@ const Cart = () =>
     import ('views/cart/Cart')
 const Profile = () =>
     import ('views/profile/Profile')
-
-//1.安装插件
+const Detail = () =>
+    import ('views/detail/Detail')
+    //1.安装插件
 Vue.use(VueRouter)
 
 //2.创建router
 const routes = [{
         path: '',
-        redirect: '/home'
+        redirect: '/home',
+        meta: { showTab: true }
     },
     {
         path: '/home',
-        component: Home
+        component: Home,
+        meta: { showTab: true }
     },
     {
         path: '/category',
-        component: Category
+        component: Category,
+        meta: { showTab: true }
     },
     {
         path: '/cart',
-        component: Cart
+        component: Cart,
+        meta: { showTab: true }
     },
     {
         path: '/profile',
-        component: Profile
+        component: Profile,
+        meta: { showTab: true }
     },
-    // {
-    //     path: '/detail/:id',
-    //     component: Detail
-    // }
+    {
+        path: '/detail/:id',
+        component: Detail,
+        meta: { showTab: false }
+    }
 ]
 const router = new VueRouter({
     routes,

@@ -36,6 +36,9 @@
     import {
         debounce
     } from 'common/utils'
+    import {
+        itemListenerMixin
+    } from 'common/mixin'
 
     import {
         getHomeMultidata,
@@ -79,10 +82,12 @@
                 isShowBackTop: false,
                 tabOffsetTop: 0,
                 isTabFixed: false,
-                saveY: 0
+                saveY: 0,
+
             }
 
         },
+        mixins: [itemListenerMixin],
         computed: {
             showGoods() {
                 return this.goods[this.currentType].list
@@ -99,11 +104,7 @@
         },
         mounted() {
             //1.监听item中图片加载完成
-            const refresh = debounce(this.$refs.scroll.refresh, 200)
-            this.$bus.$on('itemImageLoad', () => {
-                // console.log('------');
-                refresh()
-            })
+
 
             //2.获取tabControl的offsettop
             //  this.tabOffsetTop = this.$refs.tabControl.$el.offsetTop
@@ -114,7 +115,10 @@
             this.$refs.scroll.refresh()
         },
         deactivated() {
+            //1.保存Y值，
             this.saveY = this.$refs.scroll.getScrollY()
+                //2.取消全局事件的监听
+            this.$bus.$off('itemImageLoad', this.itemImgListener)
         },
         methods: {
 
