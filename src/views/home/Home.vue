@@ -28,7 +28,7 @@
     import Scroll from 'components/common/scroll/Scroll'
     import TabControl from 'components/content/tabControl/TabControl'
     import GoodsList from 'components/content/goods/GoodsList'
-    import BackTop from 'components/content/backTop/BackTop'
+
 
     import HomeSwiper from './childComps/HomeSwiper'
     import RecommendView from './childComps/RecommendView'
@@ -37,7 +37,8 @@
         debounce
     } from 'common/utils'
     import {
-        itemListenerMixin
+        itemListenerMixin,
+        backTopMixin,
     } from 'common/mixin'
 
     import {
@@ -55,7 +56,6 @@
             Scroll,
             TabControl,
             GoodsList,
-            BackTop,
             HomeSwiper,
             RecommendView,
             FeatureView
@@ -79,7 +79,7 @@
                     }
                 },
                 currentType: 'pop',
-                isShowBackTop: false,
+
                 tabOffsetTop: 0,
                 isTabFixed: false,
                 saveY: 0,
@@ -87,7 +87,7 @@
             }
 
         },
-        mixins: [itemListenerMixin],
+        mixins: [itemListenerMixin, backTopMixin],
         computed: {
             showGoods() {
                 return this.goods[this.currentType].list
@@ -139,10 +139,7 @@
                 this.$refs.tabControl1.currentIndex = index;
                 this.$refs.tabControl2.currentIndex = index;
             },
-            backClick() {
-                // console.log('topback');
-                this.$refs.scroll.scrollTo(0, 0);
-            },
+
             contentScroll(position) {
                 //1.判断BackTop是否显示
                 this.isShowBackTop = Math.abs(position.y) > 1000
